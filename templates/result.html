@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+
+<div class="card">
+    <h3 class="text-center mb-4">🔍 Prediction Result</h3>
+
+    {% if prob >= 0.5 %}
+    <div class="safe">
+        🔗 <a href="{{ url }}" target="_blank">{{ url }}</a>
+        <div class="confidence mt-2">✅ Website is {{ (prob*100)|round(0) }}% safe to use.</div>
+        <a href="{{ url }}" target="_blank" class="btn btn-success action-btn mt-2">Continue</a>
+    </div>
+    {% else %}
+    <div class="unsafe">
+        🔗 <a href="{{ url }}" target="_blank">{{ url }}</a>
+        <div class="confidence mt-2">⚠️ Website is {{ (100 - prob*100)|round(0) }}% unsafe to use.</div>
+        <a href="{{ url }}" target="_blank" class="btn btn-danger action-btn mt-2">Still want to continue</a>
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-secondary">Check another URL</a>
+    </div>
+</div>
+
+</body>
+</html>
